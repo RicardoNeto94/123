@@ -128,17 +128,22 @@ window.addEventListener('scroll', () => {
 
 // Expanding FAB behavior
 const presetFab = document.getElementById('preset-fab');
+const fabChips = document.getElementById('fab-chips');
 const fabDone = document.getElementById('fab-done');
 
 function openFab(){
   presetFab.setAttribute('aria-expanded', 'true');
+  if (typeof fabChips !== 'undefined' && fabChips) fabChips.hidden = false;
   const firstChip = document.querySelector('.fab-chips .filter-chip');
   if(firstChip) firstChip.focus();
 }
+
 function closeFab(){
   presetFab.setAttribute('aria-expanded', 'false');
+  if (typeof fabChips !== 'undefined' && fabChips) fabChips.hidden = true;
   presetFab.focus();
 }
+
 
 if(presetFab){
   presetFab.addEventListener('click', (e) => {

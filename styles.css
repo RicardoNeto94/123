@@ -81,8 +81,10 @@ body{
   background-color: var(--gold);
   color: #0A0E14;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(240,198,116,.25), 0 6px 18px rgba(0,0,0,.35);
+  box-shadow: 0 0 0 3px rgba(240,198,116,.25), 0 0 18px rgba(240,198,116,.20), 0 8px 20px rgba(0,0,0,.35);
+  transform: translateY(-1px);
 }
+
 
 
 /* Grid */
@@ -144,4 +146,4 @@ body{
 
 
 /* Align toggle to scheme */
-#theme-toggle { color: var(--gold); }
+

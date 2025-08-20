@@ -79,17 +79,3 @@
   renderCards();
 })();
 
-// Theme toggle
-const toggleBtn = document.getElementById('theme-toggle');
-const body = document.body;
-body.classList.add('dark'); // default theme
-
-toggleBtn.addEventListener('click', () => {
-  if(body.classList.contains('light')){
-    body.classList.replace('light', 'dark');
-    toggleBtn.textContent = '🌞';
-  } else {
-    body.classList.replace('dark', 'light');
-    toggleBtn.textContent = '🌙';
-  }
-});

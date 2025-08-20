@@ -108,3 +108,42 @@ if(backdrop) backdrop.addEventListener('click', closePanel);
 document.addEventListener('keydown', (e)=>{
   if(e.key === 'Escape' && !panel.hidden) closePanel();
 });
+
+// Hide/show preset toggle on scroll direction
+let lastScrollY = window.scrollY;
+window.addEventListener('scroll', () => {
+  const toggle = document.getElementById('preset-toggle');
+  if(!toggle) return;
+  if(window.scrollY > lastScrollY + 10){ // scrolling down
+    toggle.classList.add('hide');
+  } else if(window.scrollY < lastScrollY - 10){ // scrolling up
+    toggle.classList.remove('hide');
+  }
+  lastScrollY = window.scrollY;
+});
+
+// Hide floating preset toggle on scroll down, show on scroll up
+(function(){
+  const bar = document.getElementById('preset-toggle');
+  if(!bar) return;
+  let lastY = window.pageYOffset || 0;
+  let ticking = false;
+  function onScroll(){
+    const y = window.pageYOffset || 0;
+    const goingDown = y > lastY + 4;   // small threshold to avoid jitter
+    const goingUp = y < lastY - 4;
+    if(goingDown){
+      bar.classList.add('is-hidden');
+    } else if(goingUp){
+      bar.classList.remove('is-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+})(); 

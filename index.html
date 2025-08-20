@@ -1,32 +1,41 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menu</title>
-  <meta name="theme-color" content="#0b0f0d">
-  <link rel="preload" href="styles.css" as="style">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shang Shi Filters</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <!-- Replace the mark + word with <img src="logo.png" alt="Logo" style="height:34px"> if you have a file -->
-    <img src="logo.png" alt="Logo" style="height:48px; filter: drop-shadow(0 4px 12px rgba(0,0,0,.55));">
-      <div class="word"></div>
-    </div>
+  <header>
+    <img src="logo.png" alt="Shang Shi Logo" class="logo">
   </header>
 
-  <main class="container">
-    <section class="filters" aria-label="Allergen filter"></section>
+  <div class="filters-wrap" role="region" aria-label="Allergen filters">
+    <div class="filters" role="tablist">
+      <button class="filter-button active" data-filter="gluten">Gluten-free</button>
+      <button class="filter-button" data-filter="milk">Milk-free</button>
+      <button class="filter-button" data-filter="egg">Egg-free</button>
+      <button class="filter-button" data-filter="crustacean">Crustacean-free</button>
+      <button class="filter-button" data-filter="soy">Soy-free</button>
+    </div>
+  </div>
 
-    <section class="grid" aria-live="polite"></section>
-
-    <div id="empty" class="empty" style="display:none">
-      No dishes match this filter. Try another allergen.
+  <main id="dishes">
+    <div class="card" data-allergens="gluten milk">
+      <h3>Dish 1</h3>
+      <p>Contains: Gluten, Milk</p>
+    </div>
+    <div class="card" data-allergens="soy">
+      <h3>Dish 2</h3>
+      <p>Contains: Soy</p>
+    </div>
+    <div class="card" data-allergens="">
+      <h3>Dish 3</h3>
+      <p>Allergen Free</p>
     </div>
   </main>
 
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

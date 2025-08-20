@@ -18,18 +18,20 @@
 html,body{
   margin:0;
   font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background-color: #000814;
-  color: var(--text);
+  background-color: #F5F1E6; /* offwhite */
+  color: #000814; /* dark text for default */
 }
+
 
 
 
 body{
   margin:0;
   font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background-color: #000814;
-  color: var(--text);
+  background-color: #F5F1E6; /* offwhite */
+  color: #000814; /* dark text for default */
 }
+
 
 
 
@@ -70,9 +72,9 @@ body{
 .filters::-webkit-scrollbar{display:none}
 
 .filter-chip{
-  background-color: var(--card);
-  color: var(--card-text);
-  border:1px solid var(--gold);
+  background-color: #000814; /* midnight blue */
+  color: #C8A44B; /* golden text */
+  border:1px solid #C8A44B;
   border-radius:999px;
   padding:6px 14px;
   font-size:13px;
@@ -82,13 +84,15 @@ body{
   transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
   box-shadow: 0 3px 10px rgba(0,0,0,.25);
 }
+
 .filter-chip:focus-visible,
 .filter-chip:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.35) }
 .filter-chip.active{
-  background-color: var(--gold);
-  color: var(--green);
-  border-color: var(--gold);
+  background-color: #C8A44B; /* gold */
+  color: #000814; /* midnight blue text */
+  border-color: #C8A44B;
 }
+
 
 /* ======= Cards grid ======= */
 .grid{
@@ -99,15 +103,16 @@ body{
 @media (min-width:560px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width:960px){ .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-.card{
-  background: var(--card);
-  color: var(--card-text);
-  border:1px solid var(--gold-12);
+.card {
+  background: #000814; /* midnight blue */
+  color: #C8A44B; /* golden text */
+  border: 1px solid #C8A44B;
   border-radius: var(--radius);
   padding:18px;
-  box-shadow: var(--shadow);
-  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
+
 .card:hover{ transform: translateY(-2px); border-color: var(--gold-30); box-shadow: 0 8px 26px rgba(0,0,0,.35), 0 0 0 1px var(--gold-12) }
 
 .card h3{ margin:0 0 8px 0; font-size:17px; line-height:1.3 }
@@ -134,4 +139,59 @@ body{
   color: var(--muted);
   background: rgba(255,255,255,.04);
   margin-top:6px;
+}
+
+/* ===== Theme Toggle Button ===== */
+#theme-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #C8A44B;
+}
+
+/* ===== Light Theme (default) ===== */
+body.light {
+  background-color: #F5F1E6;
+  color: #000814;
+}
+body.light .card {
+  background: #000814;
+  color: #C8A44B;
+  border: 1px solid #C8A44B;
+}
+body.light .filter-chip {
+  background-color: #000814;
+  color: #C8A44B;
+  border: 1px solid #C8A44B;
+}
+body.light .filter-chip.active {
+  background-color: #C8A44B;
+  color: #000814;
+  border-color: #C8A44B;
+}
+
+/* ===== Dark Theme ===== */
+body.dark {
+  background-color: #000814;
+  color: #F5F1E6;
+}
+body.dark .card {
+  background: #F5F1E6;
+  color: #C8A44B;
+  border: 1px solid #C8A44B;
+}
+body.dark .filter-chip {
+  background-color: #F5F1E6;
+  color: #000814;
+  border: 1px solid #C8A44B;
+}
+body.dark .filter-chip.active {
+  background-color: #C8A44B;
+  color: #000814;
+  border-color: #C8A44B;
 }

@@ -2,18 +2,20 @@
 /* Reset & base */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
 :root {
-  --bg: #0b0f0d;
-  --bg-2: #0f1512;
-  --text: #e8ecea;
-  --muted: #a7b0ac;
-  --accent: #7fe3b1;
-  --glass: rgba(255,255,255,0.08);
-  --card: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.12);
-  --shadow: 0 10px 30px rgba(0,0,0,0.45);
+  --bg: #313131;
+  --bg-2: #2b2b2b;
+  --text: #d9d9d9;
+  --muted: #b5b5b5;
+  --accent: #d9d9d9;
+  --glass: rgba(255,255,255,0.05);
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.18);
+  --shadow: 0 10px 30px rgba(0,0,0,0.6);
   --radius: 16px;
 }
+
 
 /* Page */
 body {

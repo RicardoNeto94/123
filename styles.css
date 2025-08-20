@@ -45,7 +45,7 @@ body{
   -webkit-backdrop-filter: blur(12px);
   background: rgba(0,0,0,.18);
   border-bottom: 1px solid var(--gold-12);
-  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
 }
 .header-logo{
   height:48px; width:auto; display:block;
@@ -160,7 +160,7 @@ body.light {
   color: #000814;
 }
 body.light .card {
-  background: #000814;
+  background: #E0DBCF;
   color: #C8A44B;
   border: 1px solid #C8A44B;
 }
@@ -181,7 +181,7 @@ body.dark {
   color: #F5F1E6;
 }
 body.dark .card {
-  background: #F5F1E6;
+  background: #E8E2D6;
   color: #C8A44B;
   border: 1px solid #C8A44B;
 }

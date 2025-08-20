@@ -2,8 +2,8 @@
   --bg:#0A0E14;            /* deep charcoal blue-black */
   --panel:#11161D;         /* card/panel */
   --border:#2B2F36;        /* separators */
-  --gold:#D4AF37;          /* primary accent */
-  --gold-soft:#F0C674;     /* glow highlight */
+  --gold:#C2A65B;          /* primary accent */
+  --gold-soft:#E8C77A;     /* glow highlight */
   --text:#E6E9E9;          /* primary text */
   --muted:#A0A5AC;         /* secondary text */
   --radius:18px;
@@ -14,7 +14,7 @@
 /* Base */
 body{
   margin:0;
-  font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Inter', ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
   background-color: var(--bg);
   color: var(--text);
 }
@@ -81,9 +81,14 @@ body{
   background-color: var(--gold);
   color: #0A0E14;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(240,198,116,.25), 0 0 18px rgba(240,198,116,.20), 0 8px 20px rgba(0,0,0,.35);
+  /* stronger, blurrier ambient glow */
+  box-shadow:
+    0 0 0 2px rgba(200,166,91,.18),
+    0 0 30px rgba(232,199,122,.30),
+    0 14px 28px rgba(0,0,0,.35);
   transform: translateY(-1px);
 }
+
 
 
 
@@ -113,7 +118,15 @@ body{
   box-shadow: 0 12px 34px rgba(0,0,0,.55), 0 0 0 2px rgba(212,175,55,.12);
 }
 
-.card h3{ margin:0 0 8px 0; font-size:17px; line-height:1.3; color: var(--text) }
+.card h3{
+  margin:0 0 8px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight:600;
+  font-size:20px;
+  letter-spacing: .2px;
+  line-height:1.25;
+}
+
 
 .meta{ display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color: var(--muted); }
 

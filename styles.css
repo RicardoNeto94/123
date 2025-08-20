@@ -15,13 +15,24 @@
 
 /* ======= Base ======= */
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{
+  margin:0;
+  font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: linear-gradient(180deg, #000814 0%, #0C2E1A 100%);
+  background-image: url('noise.png');
+  background-blend-mode: overlay;
+  color: var(--text);
+}
+
 body{
   margin:0;
   font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background-color: var(--green); /* solid, no gradient */
+  background: linear-gradient(180deg, #000814 0%, #0C2E1A 100%);
+  background-image: url('noise.png');
+  background-blend-mode: overlay;
   color: var(--text);
 }
+
 
 /* ======= Header (glass, centered logo only) ======= */
 .header{

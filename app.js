@@ -17,7 +17,7 @@
       const btn = document.createElement('button');
       btn.className = 'filter-chip';
       btn.type = 'button';
-      btn.textContent = code + ' free';
+      btn.textContent = code;
       btn.setAttribute('aria-pressed', selected.has(code) ? 'true' : 'false');
       if(selected.has(code)) btn.classList.add('active');
       btn.addEventListener('click', () => {

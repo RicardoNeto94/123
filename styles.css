@@ -1,68 +1,54 @@
-/* ======= Palette ======= */
 :root{
-  --green:#0C2E1A;
-  --gold:#C8A44B;
-  --gold-12: rgba(200,164,75,.12);
-  --gold-30: rgba(200,164,75,.30);
-  --gold-45: rgba(200,164,75,.45);
-  --card:#F5F1E6;
-  --card-text:#1A1A1A;
-  --text:#EDECE6;
-  --muted:#D9D3C6;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --bg:#0A0E14;            /* deep charcoal blue-black */
+  --panel:#11161D;         /* card/panel */
+  --border:#2B2F36;        /* separators */
+  --gold:#D4AF37;          /* primary accent */
+  --gold-soft:#F0C674;     /* glow highlight */
+  --text:#E6E9E9;          /* primary text */
+  --muted:#A0A5AC;         /* secondary text */
   --radius:18px;
-}
-
-/* ======= Base ======= */
-*{box-sizing:border-box}
-html,body{
-  margin:0;
-  font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background-color: #F5F1E6; /* offwhite */
-  color: #000814; /* dark text for default */
+  --shadow:0 8px 24px rgba(0,0,0,.45);
 }
 
 
-
-
+/* Base */
 body{
   margin:0;
   font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background-color: #F5F1E6; /* offwhite */
-  color: #000814; /* dark text for default */
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 
-
-
-
-/* ======= Header (glass, centered logo only) ======= */
+/* Header */
 .header{
   position: sticky; top:0; z-index:50;
   height:76px;
   display:flex; align-items:center; justify-content:center;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: rgba(0,0,0,.18);
-  border-bottom: 1px solid var(--gold-12);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  background: rgba(10,14,20,.6);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
 }
+
 .header-logo{
   height:48px; width:auto; display:block;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,.55));
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.6));
   user-select:none;
 }
 
-/* ======= Layout ======= */
+/* Container */
 .container{max-width:1100px; margin:24px auto; padding:0 16px}
 
-/* ======= Filters (compact horizontal scroll) ======= */
+/* Filters */
 .filters-wrap{
   background: transparent;
   padding: 8px 2px 12px 2px;
-  border-bottom: 1px solid var(--gold-12);
+  border-bottom: 1px solid var(--border);
   margin-bottom: 16px;
 }
+
 .filters{
   display:flex; gap:8px;
   overflow-x:auto; overflow-y:hidden;
@@ -72,9 +58,9 @@ body{
 .filters::-webkit-scrollbar{display:none}
 
 .filter-chip{
-  background-color: #000814; /* midnight blue */
-  color: #C8A44B; /* golden text */
-  border:1px solid #C8A44B;
+  background-color: var(--panel);
+  color: var(--text);
+  border:1px solid var(--border);
   border-radius:999px;
   padding:6px 14px;
   font-size:13px;
@@ -85,16 +71,21 @@ body{
   box-shadow: 0 3px 10px rgba(0,0,0,.25);
 }
 
-.filter-chip:focus-visible,
-.filter-chip:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.35) }
+.filter-chip:hover,
+.filter-chip:focus-visible{
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
 .filter-chip.active{
-  background-color: #C8A44B; /* gold */
-  color: #000814; /* midnight blue text */
-  border-color: #C8A44B;
+  background-color: var(--gold);
+  color: #0A0E14;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(240,198,116,.25), 0 6px 18px rgba(0,0,0,.35);
 }
 
 
-/* ======= Cards grid ======= */
+/* Grid */
 .grid{
   display:grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -103,95 +94,54 @@ body{
 @media (min-width:560px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width:960px){ .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-.card {
-  background: #000814; /* midnight blue */
-  color: #C8A44B; /* golden text */
-  border: 1px solid #C8A44B;
+/* Cards */
+.card{
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding:18px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: var(--shadow);
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, outline-color .2s ease;
 }
 
-.card:hover{ transform: translateY(-2px); border-color: var(--gold-30); box-shadow: 0 8px 26px rgba(0,0,0,.35), 0 0 0 1px var(--gold-12) }
+.card:hover{
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 34px rgba(0,0,0,.55), 0 0 0 2px rgba(212,175,55,.12);
+}
 
-.card h3{ margin:0 0 8px 0; font-size:17px; line-height:1.3 }
-.meta{ display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#333 }
+.card h3{ margin:0 0 8px 0; font-size:17px; line-height:1.3; color: var(--text) }
+
+.meta{ display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color: var(--muted); }
+
 .badge{
-  border:1px solid var(--gold-12);
+  border:1px solid var(--border);
   padding:6px 10px;
   border-radius:999px;
-  background: rgba(255,255,255,.6);
-  color:#222;
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
 }
+
 .badge.safe{
   background: var(--gold);
-  color: var(--green);
+  color: #0A0E14;
   border-color: var(--gold);
   font-weight:600;
 }
 
+
+/* Empty */
 .empty{
-  border:1px dashed var(--gold-12);
+  border:1px dashed var(--border);
   border-radius: var(--radius);
   padding:18px;
   text-align:center;
   color: var(--muted);
-  background: rgba(255,255,255,.04);
+  background: rgba(255,255,255,.02);
   margin-top:6px;
 }
 
-/* ===== Theme Toggle Button ===== */
-#theme-toggle {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #C8A44B;
-}
 
-/* ===== Light Theme (default) ===== */
-body.light {
-  background-color: #F5F1E6;
-  color: #000814;
-}
-body.light .card {
-  background: #E0DBCF;
-  color: #C8A44B;
-  border: 1px solid #C8A44B;
-}
-body.light .filter-chip {
-  background-color: #000814;
-  color: #C8A44B;
-  border: 1px solid #C8A44B;
-}
-body.light .filter-chip.active {
-  background-color: #C8A44B;
-  color: #000814;
-  border-color: #C8A44B;
-}
-
-/* ===== Dark Theme ===== */
-body.dark {
-  background-color: #000814;
-  color: #F5F1E6;
-}
-body.dark .card {
-  background: #E8E2D6;
-  color: #C8A44B;
-  border: 1px solid #C8A44B;
-}
-body.dark .filter-chip {
-  background-color: #F5F1E6;
-  color: #000814;
-  border: 1px solid #C8A44B;
-}
-body.dark .filter-chip.active {
-  background-color: #C8A44B;
-  color: #000814;
-  border-color: #C8A44B;
-}
+/* Align toggle to scheme */
+#theme-toggle { color: var(--gold); }

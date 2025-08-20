@@ -82,7 +82,7 @@
 // Theme toggle
 const toggleBtn = document.getElementById('theme-toggle');
 const body = document.body;
-body.classList.add('light'); // default theme
+body.classList.add('dark'); // default theme
 
 toggleBtn.addEventListener('click', () => {
   if(body.classList.contains('light')){

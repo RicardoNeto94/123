@@ -1,6 +1,6 @@
 (async function(){
   const grid = document.getElementById('grid');
-  const filtersEl = document.getElementById('fab-chips');
+  const filtersEl = document.getElementById('filters');
   const empty = document.getElementById('empty');
   const res = await fetch('menu.json');
   const data = await res.json();
@@ -80,6 +80,28 @@
 })();
 
 
+// Floating preset panel logic
+const presetToggle = document.getElementById('preset-toggle');
+const panel = document.getElementById('filters-panel');
+const panelClose = document.getElementById('filters-close');
+const backdrop = panel ? panel.querySelector('.filters-backdrop') : null;
+
+function openPanel(){
+  panel.hidden = false;
+  presetToggle.setAttribute('aria-expanded', 'true');
+  // focus first chip if exists
+  const firstChip = document.querySelector('.filter-chip');
+  if(firstChip) firstChip.focus();
+}
+function closePanel(){
+  panel.hidden = true;
+  presetToggle.setAttribute('aria-expanded', 'false');
+  presetToggle.focus();
+}
+if(presetToggle && panel){
+  presetToggle.addEventListener('click', () => {
+    if(panel.hidden) openPanel(); else closePanel();
+  });
 }
 if(panelClose) panelClose.addEventListener('click', closePanel);
 if(backdrop) backdrop.addEventListener('click', closePanel);
@@ -109,74 +131,6 @@ window.addEventListener('scroll', () => {
   function onScroll(){
     const y = window.pageYOffset || 0;
     const goingDown = y > lastY + 4;   // small threshold to avoid jitter
-    const goingUp = y < lastY - 4;
-    if(goingDown){
-      bar.classList.add('is-hidden');
-    } else if(goingUp){
-      bar.classList.remove('is-hidden');
-    }
-    lastY = y;
-    ticking = false;
-  }
-  window.addEventListener('scroll', ()=>{
-    if(!ticking){
-      window.requestAnimationFrame(onScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-})(); 
-
-// Expanding FAB behavior
-const presetFab = document.getElementById('preset-fab');
-const fabChips = document.getElementById('fab-chips');
-const fabDone = document.getElementById('fab-done');
-
-function openFab(){
-  presetFab.setAttribute('aria-expanded', 'true');
-  if (typeof fabChips !== 'undefined' && fabChips) fabChips.hidden = false;
-  const firstChip = document.querySelector('.fab-chips .filter-chip');
-  if(firstChip) firstChip.focus();
-}
-
-function closeFab(){
-  presetFab.setAttribute('aria-expanded', 'false');
-  if (typeof fabChips !== 'undefined' && fabChips) fabChips.hidden = true;
-  presetFab.focus();
-}
-
-
-if(presetFab){
-  presetFab.addEventListener('click', (e) => {
-    // prevent clicks on inner controls from re-toggling
-    const target = e.target;
-    if(target.closest('.filter-chip') || target.id === 'fab-done') return;
-    const expanded = presetFab.getAttribute('aria-expanded') === 'true';
-    if(expanded) closeFab(); else openFab();
-  });
-  presetFab.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      const expanded = presetFab.getAttribute('aria-expanded') === 'true';
-      if(expanded) closeFab(); else openFab();
-    }
-    if(e.key === 'Escape'){
-      if(presetFab.getAttribute('aria-expanded') === 'true') closeFab();
-    }
-  });
-}
-if(fabDone){
-  fabDone.addEventListener('click', closeFab);
-}
-
-// Hide-on-scroll behavior for FAB
-(function(){
-  const bar = document.getElementById('preset-fab');
-  if(!bar) return;
-  let lastY = window.pageYOffset || 0;
-  let ticking = false;
-  function onScroll(){
-    const y = window.pageYOffset || 0;
-    const goingDown = y > lastY + 4;
     const goingUp = y < lastY - 4;
     if(goingDown){
       bar.classList.add('is-hidden');

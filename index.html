@@ -14,6 +14,16 @@
     </header>
 
   <main class="container" role="main">
+    <!-- Floating Preset Toggle -->
+<button id="preset-toggle" class="preset-toggle" aria-expanded="false" aria-controls="filters-panel">
+  Select allergens
+  <span class="caret">▼</span>
+</button>
+
+<!-- Slide-up Filters Panel -->
+<div id="filters-panel" class="filters-panel" role="dialog" aria-modal="true" aria-label="Allergen presets" hidden>
+  <div class="filters-sheet">
+    <div class="filters" id="filters" role="listbox" aria-multiselectable="true"></div>
     <button id="filters-close" class="filters-close" aria-label="Close">Done</button>
   </div>
   <div class="filters-backdrop"></div>
@@ -28,12 +38,5 @@
   </main>
 
   <script src="app.js"></script>
-<!-- Expanding Floating Preset Bar -->
-<div id="preset-fab" class="preset-fab" role="button" tabindex="0" aria-expanded="false" aria-controls="fab-chips">
-  <span class="label">Select allergens <span class="caret" aria-hidden="true">▾</span></span>
-  <div id="fab-chips" class="fab-chips" hidden></div>
-  <button id="fab-done" class="fab-done" aria-label="Apply">Done</button>
-</div>
-
 </body>
 </html>

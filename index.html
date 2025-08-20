@@ -1,29 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menu</title>
-  <meta name="theme-color" content="#0b0f0d">
-  <link rel="preload" href="styles.css" as="style">
+  <title>Shang Shi Menu</title>
+  <meta name="theme-color" content="#0C2E1A">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="header">
-    <!-- Replace the mark + word with <img src="logo.png" alt="Logo" style="height:34px"> if you have a file -->
-    <img src="logo.png" alt="Logo" style="height:48px; filter: drop-shadow(0 4px 12px rgba(0,0,0,.55));">
-      <div class="word"></div>
-    </div>
+  <header class="header" role="banner">
+    <img src="logo.png" alt="Shang Shi" class="header-logo">
   </header>
 
-  <main class="container">
-    <section class="filters" aria-label="Allergen filter"></section>
+  <main class="container" role="main">
+    <section class="filters-wrap" role="region" aria-label="Allergen filters">
+      <div class="filters" id="filters" role="tablist" aria-multiselectable="true"></div>
+    </section>
 
-    <section class="grid" aria-live="polite"></section>
+    <section id="grid" class="grid" aria-live="polite"></section>
 
-    <div id="empty" class="empty" style="display:none">
-      No dishes match this filter. Try another allergen.
+    <div id="empty" class="empty" hidden>
+      No dishes match these filters. Try removing one.
     </div>
   </main>
 

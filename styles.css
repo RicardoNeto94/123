@@ -1,247 +1,126 @@
+/* ======= Palette ======= */
+:root{
+  --green:#0C2E1A;
+  --gold:#C8A44B;
+  --gold-12: rgba(200,164,75,.12);
+  --gold-30: rgba(200,164,75,.30);
+  --gold-45: rgba(200,164,75,.45);
+  --card:#F5F1E6;
+  --card-text:#1A1A1A;
+  --text:#EDECE6;
+  --muted:#D9D3C6;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+}
 
-/* Reset & base */
-* { box-sizing: border-box; }
-html, body {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background: linear-gradient(180deg, #0b0b0b 0%, #1a2f25 85%);
+/* ======= Base ======= */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background-color: var(--green); /* solid, no gradient */
   color: var(--text);
-  min-height: 100vh;
 }
 
-
-
-
-:root {
-  --bg: #101010;            /* near-black */
-  --bg-2: #1a2f25;          /* elegant deep green */
-  --text: #e9e9e9;          /* softer, brighter text */
-  --muted: #c7c7c7;
-  --accent: #e9e9e9;
-  --gold: #D4AF37;          /* elegant gold */
-  --gold-30: rgba(212,175,55,0.30);
-  --gold-45: rgba(212,175,55,0.45);
-  --gold-12: rgba(212,175,55,0.12);
-  --glass: rgba(255,255,255,0.10);
-  --card: #faf9f6;          /* off-white card */
-  --card-text: #222;        /* dark text on card */
-  --border: rgba(0,0,0,0.08);
-  --shadow: 0 10px 30px rgba(0,0,0,0.35);
-  --radius: 18px;
-}
-
-
-
-
-
-/* Page */
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  background: linear-gradient(180deg, #0b0b0b 0%, #1a2f25 85%);
-  color: var(--text);
-  min-height: 100vh;
-}
-
-/* Glass header */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 76px;
+/* ======= Header (glass, centered logo only) ======= */
+.header{
+  position: sticky; top:0; z-index:50;
+  height:76px;
+  display:flex; align-items:center; justify-content:center;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: linear-gradient(180deg, rgba(26,47,37,0.35), rgba(16,16,16,0.35));
+  background: rgba(0,0,0,.18);
   border-bottom: 1px solid var(--gold-12);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+.header-logo{
+  height:48px; width:auto; display:block;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.55));
+  user-select:none;
 }
 
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.55));
-  user-select: none;
+/* ======= Layout ======= */
+.container{max-width:1100px; margin:24px auto; padding:0 16px}
+
+/* ======= Filters (compact horizontal scroll) ======= */
+.filters-wrap{
+  background: transparent;
+  padding: 8px 2px 12px 2px;
+  border-bottom: 1px solid var(--gold-12);
+  margin-bottom: 16px;
+}
+.filters{
+  display:flex; gap:8px;
+  overflow-x:auto; overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.filters::-webkit-scrollbar{display:none}
+
+.filter-chip{
+  background-color: var(--card);
+  color: var(--card-text);
+  border:1px solid var(--gold);
+  border-radius:999px;
+  padding:6px 14px;
+  font-size:13px;
+  line-height:1;
+  white-space:nowrap;
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,.25);
+}
+.filter-chip:focus-visible,
+.filter-chip:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.35) }
+.filter-chip.active{
+  background-color: var(--gold);
+  color: var(--green);
+  border-color: var(--gold);
 }
 
-/* Replace this with an <img src="logo.png"> if you have a logo file */
-.logo .mark {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #9bf2c9, #54d39d 55%, #249c6b);
-  border: 1px solid rgba(0,0,0,0.2);
-}
-
-.logo .word {
-  font-weight: 700;
-  letter-spacing: 0.25px;
-  font-size: 20px;
-}
-
-/* Content container */
-.container {
-  max-width: 1100px;
-  margin: 28px auto;
-  padding: 0 16px;
-}
-
-/* Filter bar */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--gold-12);
-  cursor: pointer;
-  transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  font-size: 14px;
-  color: var(--text);
-}
-.filter-chip:hover { transform: translateY(-1px); border-color: var(--gold-30); }
-.filter-chip.active {
-  background: rgba(212,175,55,0.12);
-  border-color: var(--gold-45);
-  box-shadow: 0 0 0 1px var(--gold-12), 0 0 16px var(--gold-30) inset;
-  color: #fff;
-}
-
-.filters .label {
-  opacity: 0.7;
-  font-size: 13px;
-  margin-right: 6px;
-}
-
-/* Cards grid */
-.grid {
-  display: grid;
+/* ======= Cards grid ======= */
+.grid{
+  display:grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 14px;
+  gap:14px;
 }
-@media (min-width: 560px) {
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (min-width: 960px) {
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
+@media (min-width:560px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width:960px){ .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-.card {
+.card{
   background: var(--card);
-  border: 1px solid var(--gold-12);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-  transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   color: var(--card-text);
-}
-.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold-30);
-  box-shadow: 0 8px 26px rgba(0,0,0,0.35), 0 0 0 1px var(--gold-12), 0 0 22px var(--gold-30);
-}
-
-.card h3 {
-  margin: 0 0 10px 0;
-  font-size: 17px;
-  line-height: 1.3;
-  color: #1a1a1a;
-}
-
-.meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.badge {
-  border: 1px solid var(--gold-12);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.6);
-  color: #222;
-}
-
-.empty {
-  border: 1px dashed var(--gold-12);
+  border:1px solid var(--gold-12);
   border-radius: var(--radius);
-  padding: 18px;
-  text-align: center;
-  color: var(--muted);
-  background: rgba(255,255,255,0.03);
-  margin-top: 6px;
-}
-
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 76px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: linear-gradient(180deg, rgba(26,47,37,0.35), rgba(16,16,16,0.35));
-  border-bottom: 1px solid var(--gold-12);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-}
-
-.filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--gold-12);
-  cursor: pointer;
-  transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  font-size: 14px;
-  color: var(--text);
-}
-.filter-chip.active {
-  background: rgba(212,175,55,0.12);
-  border-color: var(--gold-45);
-  box-shadow: 0 0 0 1px var(--gold-12), 0 0 16px var(--gold-30) inset;
-  color: #fff;
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--gold-12);
-  border-radius: var(--radius);
-  padding: 18px;
+  padding:18px;
   box-shadow: var(--shadow);
-  transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  color: var(--card-text);
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
 }
-.card h3 {
-  margin: 0 0 10px 0;
-  font-size: 17px;
-  line-height: 1.3;
-  color: #1a1a1a;
+.card:hover{ transform: translateY(-2px); border-color: var(--gold-30); box-shadow: 0 8px 26px rgba(0,0,0,.35), 0 0 0 1px var(--gold-12) }
+
+.card h3{ margin:0 0 8px 0; font-size:17px; line-height:1.3 }
+.meta{ display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#333 }
+.badge{
+  border:1px solid var(--gold-12);
+  padding:6px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.6);
+  color:#222;
 }
-.card p {
-  color: #333;
+.badge.safe{
+  background: var(--gold);
+  color: var(--green);
+  border-color: var(--gold);
+  font-weight:600;
 }
-.badge {
-  border: 1px solid var(--gold-12);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.6);
-  color: #222;
+
+.empty{
+  border:1px dashed var(--gold-12);
+  border-radius: var(--radius);
+  padding:18px;
+  text-align:center;
+  color: var(--muted);
+  background: rgba(255,255,255,.04);
+  margin-top:6px;
 }

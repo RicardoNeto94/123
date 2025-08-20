@@ -160,3 +160,75 @@ body{
 
 /* Align toggle to scheme */
 
+
+/* ===== Floating Preset Toggle ===== */
+.preset-toggle{
+  position: fixed;
+  left: 50%; transform: translateX(-50%);
+  bottom: 20px;
+  z-index: 80;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  font-size: 14px;
+  cursor: pointer;
+}
+.preset-toggle[aria-expanded="true"] .caret{ transform: rotate(180deg); }
+.preset-toggle .caret{ display:inline-block; margin-left:8px; transition: transform .2s ease; }
+
+/* ===== Slide-up Filters Panel ===== */
+.filters-panel{
+  position: fixed; inset: 0; z-index: 70;
+  display: grid; grid-template-rows: 1fr auto;
+}
+.filters-panel[hidden]{ display:none; }
+
+.filters-backdrop{
+  grid-row: 1 / 2;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(2px);
+}
+
+.filters-sheet{
+  grid-row: 2 / 3;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -20px 40px rgba(0,0,0,.6);
+  padding: 14px 14px 16px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  animation: slideUp .2s ease;
+}
+@keyframes slideUp{
+  from{ transform: translateY(12px); opacity: .7; }
+  to{ transform: translateY(0); opacity: 1; }
+}
+
+/* Chips layout inside sheet */
+.filters{
+  display:flex; gap:10px;
+  overflow-x:auto; overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding: 2px 2px 8px;
+}
+.filters::-webkit-scrollbar{ display:none; }
+
+.filters-close{
+  margin-top: 10px;
+  background: var(--gold);
+  color: #0A0E14;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: 100%;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+  cursor: pointer;
+}
+
+/* Remove old inline filters spacing if any remained */
+.filters-wrap{ display:none !important; }

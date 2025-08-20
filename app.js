@@ -79,3 +79,32 @@
   renderCards();
 })();
 
+
+// Floating preset panel logic
+const presetToggle = document.getElementById('preset-toggle');
+const panel = document.getElementById('filters-panel');
+const panelClose = document.getElementById('filters-close');
+const backdrop = panel ? panel.querySelector('.filters-backdrop') : null;
+
+function openPanel(){
+  panel.hidden = false;
+  presetToggle.setAttribute('aria-expanded', 'true');
+  // focus first chip if exists
+  const firstChip = document.querySelector('.filter-chip');
+  if(firstChip) firstChip.focus();
+}
+function closePanel(){
+  panel.hidden = true;
+  presetToggle.setAttribute('aria-expanded', 'false');
+  presetToggle.focus();
+}
+if(presetToggle && panel){
+  presetToggle.addEventListener('click', () => {
+    if(panel.hidden) openPanel(); else closePanel();
+  });
+}
+if(panelClose) panelClose.addEventListener('click', closePanel);
+if(backdrop) backdrop.addEventListener('click', closePanel);
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && !panel.hidden) closePanel();
+});

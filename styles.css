@@ -117,65 +117,41 @@ button.ghost{
 }
 
 
-/* === OVERRIDES: Off-white background, gold cards, navy pills, clean logo === */
-
-/* Background to solid off-white */
-html, body {
-  background: #F5F5F5 !important;
-  color: #1b1b1b;
+/* Header: logo-only centered */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
 }
-
-/* Header logo: remove ring/box line */
 .header-logo {
-  box-shadow: none !important;
-  border: none !important;
-  background: transparent !important;
+  width: 100px;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
+/* Chips scroll + center */
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  justify-content: center;
+}
+.chips::-webkit-scrollbar { display: none; }
 
-/* Cards: #ba8c5a with subtle lift and white text */
-.card {
-  background: #ba8c5a !important;
-  color: #ffffff !important;
-  border: none !important;
-  box-shadow: 0 14px 36px rgba(0,0,0,0.25) !important;
-}
-.card h3, .card p { color: #ffffff !important; }
-.badge {
-  background: rgba(255,255,255,0.15) !important;
-  color: #fff !important;
-  border: 1px solid rgba(255,255,255,0.25) !important;
-}
-.badge.safe {
-  background: rgba(255,255,255,0.25) !important;
-  color: #143a2c !important;
-  border-color: rgba(255,255,255,0.4) !important;
-}
 
-/* Pills (chips): default navy dark blue, white text; active soft gold */
-.chips { justify-content: center; }
-.chip {
-  background: #1a1a2e !important; /* navy dark blue */
-  color: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.15) !important;
-}
-.chip.active {
-  background: #d4af37 !important; /* soft gold */
-  color: #1b1b1b !important;
-  border-color: #d4af37 !important;
-}
-
-/* Meta text color tweak on light bg */
-.meta-row, .footer, .sub, .active-filter {
-  color: #2d2d2d !important;
-}
-.active-filter { color: #a8842a !important; } /* muted gold for clarity */
-
-/* Search inputs/ghost buttons if present anywhere */
-input[type="search"], .ghost {
-  background: #ffffff !important;
-  color: #1b1b1b !important;
-  border: 1px solid rgba(0,0,0,0.12) !important;
-}
-
-/* Optional: grid gap breathing on light bg */
-.main { padding-bottom: 24px; }
+/* === OVERRIDES: Off-white bg, gold cards, navy pills === */
+html, body { background:#F5F5F5 !important; color:#1b1b1b; }
+.card { background:#ba8c5a !important; color:#fff !important; border:none !important; box-shadow:0 14px 36px rgba(0,0,0,.25) !important; }
+.card h3, .card p { color:#fff !important; }
+.badge { background:rgba(255,255,255,.15) !important; color:#fff !important; border:1px solid rgba(255,255,255,.25) !important; }
+.badge.safe { background:rgba(255,255,255,.25) !important; color:#143a2c !important; border-color:rgba(255,255,255,.4) !important; }
+.chip { background:#1a1a2e !important; color:#fff !important; border:1px solid rgba(0,0,0,.15) !important; }
+.chip.active { background:#d4af37 !important; color:#1b1b1b !important; border-color:#d4af37 !important; }
+.meta-row, .footer, .sub, .active-filter { color:#2d2d2d !important; }
+.active-filter { color:#a8842a !important; }

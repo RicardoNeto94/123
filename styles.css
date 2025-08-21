@@ -28,7 +28,7 @@ html,body{margin:0;background:#0C0F14;color:var(--text);font-family:-apple-syste
 /* Grid & cards */
 .main{max-width:1100px;margin:0 auto;padding:18px 16px 120px}
 .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-.card{background:var(--card);color:#1b1b1b;border:none;border-radius:18px;padding:18px;box-shadow:0 14px 36px rgba(0,0,0,.25);position:relative}
+.card{border:1px solid rgba(255,255,255,0.06); background:var(--card);color:#1b1b1b;border:none;border-radius:18px;padding:18px;position:relative}
 .card h3{margin:0 0 6px 0;color:#1b1b1b;font-size:18px;line-height:1.25}
 .desc{margin:0;color:#1b1b1b;opacity:.9}
 .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
@@ -58,10 +58,16 @@ html,body{margin:0;background:#0C0F14;color:var(--text);font-family:-apple-syste
   box-shadow: 0 12px 28px rgba(0,0,0,.35);
 }
 .filter-btn{
-  background:#ffffff; color:#c9a64b; border:1px solid rgba(212,175,55,.65);
-  border-radius:999px; padding:8px 14px; font-size:14px;
-  display:inline-flex; align-items:center; gap:8px;
-  box-shadow:0 6px 16px rgba(0,0,0,.25), 0 0 8px rgba(212,175,55,.15);
+  background: rgba(255,255,255,0.22);
+  color: #c9a64b;
+  border: none; /* remove outline */
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18); /* softer, no gold glow */
 }
 .filter-btn .dot{ width:8px; height:8px; border-radius:50%; background:#c9a64b; opacity:.8 }
 
@@ -93,9 +99,20 @@ html,body{margin:0;background:#0C0F14;color:var(--text);font-family:-apple-syste
 
 @media (max-width:480px){
   .grid{grid-template-columns:1fr 1fr;gap:12px}
-  .card{padding:14px;border-radius:14px}
+  .card{border:1px solid rgba(255,255,255,0.06); padding:14px;border-radius:14px}
   .header-logo{width:72px}
-  .filter-btn{padding:7px 12px;font-size:13px}
+  .filter-btn{
+  background: rgba(255,255,255,0.22);
+  color: #c9a64b;
+  border: none; /* remove outline */
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18); /* softer, no gold glow */
+}
   .filter-panel{bottom: calc(env(safe-area-inset-bottom) + 58px)}
   .filter-panel .chips{padding:5px 6px;gap:6px}
 }

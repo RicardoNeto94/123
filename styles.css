@@ -291,11 +291,11 @@ body{
 }
 
 /* ===== Frosted blur backdrop for expanded selector ===== */
-.fab-backdrop{ position:fixed; inset:0; z-index:85; opacity:0; pointer-events:none; }
-.fab-backdrop.show{ opacity:0; pointer-events:none; }
+
+
 
 /* Ensure the expanding pill sits above the backdrop */
-.preset-fab{ z-index:  90; } /* keep earlier z-index high */
+ /* keep earlier z-index high */
 
 
 /* === FORCE latest pill selector styles (placed at end for precedence) === */
@@ -331,77 +331,84 @@ body{ margin:0; background: var(--bg); color: var(--text); font-family:'Inter', 
 .empty{ border:1px dashed var(--border); border-radius: var(--radius); padding:18px; text-align:center; color:var(--muted); background: rgba(255,255,255,.02); margin-top:6px; }
 
 /* Floating pill selector base (collapsed) */
-.preset-fab{
-  position: fixed; left:50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom,0px) + 16px);
-  z-index: 90;
-  background: linear-gradient(180deg, rgba(194,166,91,.14), rgba(194,166,91,.10));
-  color: var(--text);
-  border:1px solid var(--gold);
-  border-radius: 999px;
-  padding: 10px 18px;
-  box-shadow: 0 10px 26px rgba(0,0,0,.45), 0 0 0 2px rgba(194,166,91,.10) inset;
-  font-family:'Cormorant Garamond', serif; font-weight:600; font-size:16px; letter-spacing:.2px; text-align:center;
-  transition: opacity .25s ease, transform .25s ease;
-}
-.preset-fab .caret{ color: var(--gold); display:inline-block; margin-left:8px; transition: transform .28s cubic-bezier(.22,.9,.3,1); }
-.preset-fab.is-hidden{ opacity:0; transform: translateX(-50%) translateY(20px); pointer-events:none; }
+
+
+
 
 /* Expanded pill with blur backdrop */
-.fab-backdrop{ position:fixed; inset:0; z-index:85; opacity:0; pointer-events:none; }
-.fab-backdrop.show{ opacity:0; pointer-events:none; }
-
-.preset-fab[aria-expanded="true"]{
-  padding: 12px 14px !important;
-  width: min(88vw, 520px) !important;
-  border-radius: 24px !important;
-  background-color: var(--panel) !important; /* SOLID */
-  background: var(--panel) !important;       /* ensure no gradient wins */
-  border: 1px solid var(--gold) !important;
-  box-shadow: 0 16px 38px rgba(0,0,0,.55), 0 0 0 2px rgba(194,166,91,.12) inset, 0 0 24px rgba(194,166,91,.15) !important;
-}
 
 
-.preset-fab[aria-expanded="true"] .caret{ transform: rotate(180deg); }
 
-.fab-chips{
-  margin-top: 8px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  max-height: 40vh;
-  overflow-y: auto;
-  padding: 2px 0 6px;
-}
 
-.fab-chips .filter-chip{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 999px; /* pill */
-  font-size: 13px;
-  font-weight: 600;
-  width: 100%;
-}
 
-.fab-chips .filter-chip.active{ box-shadow: 0 0 0 2px rgba(194,166,91,.18), 0 0 18px rgba(232,199,122,.22), 0 8px 18px rgba(0,0,0,.28); }
 
-.fab-done{ margin:10px auto 2px; width:auto; min-width:120px; padding:8px 14px; border-radius:999px; display:inline-block; background: var(--gold); color:#0A0E14; border:1px solid var(--gold); box-shadow: 0 6px 16px rgba(0,0,0,.35); cursor:pointer; }
+
+
+
+
+
+
+
+
+
 
 /* Chip base (re-assert) */
 .filter-chip{ background-color: var(--panel); color: var(--text); border:1px solid var(--border); border-radius:12px; }
 
 @media(max-width:390px){
-  .preset-fab[aria-expanded="true"]{
-  padding: 12px 14px !important;
-  width: min(88vw, 520px) !important;
-  border-radius: 24px !important;
-  background-color: var(--panel) !important; /* SOLID */
-  background: var(--panel) !important;       /* ensure no gradient wins */
-  border: 1px solid var(--gold) !important;
-  box-shadow: 0 16px 38px rgba(0,0,0,.55), 0 0 0 2px rgba(194,166,91,.12) inset, 0 0 24px rgba(194,166,91,.15) !important;
+  
+
+
+}
+
+/* ===== Sticky top preset bar ===== */
+.preset-topbar{
+  position: sticky;
+  top: 76px;              /* sit directly under the sticky header (header is 76px high) */
+  z-index: 60;
+  background: var(--bg);
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 14px rgba(0,0,0,.25); /* subtle drop shadow for separation */
 }
 
 
+/* Horizontal scroll chips */
+.filters{
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 2px 6px;
+}
+.filters::-webkit-scrollbar{ display: none; }
+
+/* Chip base (pill) */
+.filter-chip{
+  background-color: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(0,0,0,.25);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.filter-chip:focus-visible, .filter-chip:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+}
+.filter-chip.active{
+  background-color: var(--gold);
+  color: #0A0E14;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(194,166,91,.18), 0 0 18px rgba(232,199,122,.22), 0 8px 18px rgba(0,0,0,.28);
 }

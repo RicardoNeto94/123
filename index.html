@@ -11,7 +11,11 @@
 <body class="dark">
   <header class="header" role="banner">
     <img src="logo.png" alt="Shang Shi" class="header-logo">
-  </header>
+  \1
+<section class="preset-topbar" role="region" aria-label="Allergen presets">
+  <div id="filters" class="filters" role="listbox" aria-multiselectable="true"></div>
+</section>
+
 
   <main class="container" role="main">
     <section id="grid" class="grid" aria-live="polite"></section>
@@ -19,14 +23,9 @@
   </main>
 
   <!-- Floating pill selector -->
-  <div id="preset-fab" class="preset-fab" role="button" tabindex="0" aria-expanded="false" aria-controls="fab-chips">
-    <span class="label">Select allergens <span class="caret" aria-hidden="true">▾</span></span>
-    <div id="fab-chips" class="fab-chips" hidden></div>
-    <button id="fab-done" class="fab-done" aria-label="Apply">Done</button>
+  <button id="fab-done" class="fab-done" aria-label="Apply">Done</button>
   </div>
   <!-- Blur backdrop -->
-  <div id="fab-backdrop" class="fab-backdrop" aria-hidden="true"></div>
-
   <script src="app.js?v=1755735356"></script>
 </body>
 </html>

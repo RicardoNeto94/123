@@ -2,11 +2,7 @@
 (async function(){
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
-  const presetFab = document.getElementById('preset-fab');
-  const fabChips = document.getElementById('fab-chips');
-  const fabDone = document.getElementById('fab-done');
-  const fabBackdrop = document.getElementById('fab-backdrop');
-
+        
   const res = await fetch('menu.json');
   const data = await res.json();
 
@@ -14,8 +10,8 @@
   const selected = new Set();
 
   function renderFilters(){
-    if(!fabChips) return;
-    fabChips.innerHTML = '';
+    if(!filtersEl) return;
+    filtersEl.innerHTML = '';
     allAllergens.forEach(code => {
       const btn = document.createElement('button');
       btn.className = 'filter-chip';
@@ -28,7 +24,7 @@
         renderCards();
   initFabCollapsed();
       });
-      fabChips.appendChild(btn);
+      filtersEl.appendChild(btn);
     });
   }
 
@@ -71,44 +67,14 @@
     });
   }
 
-  function openFab(){
-    presetFab.setAttribute('aria-expanded', 'true');
-    if(fabChips) fabChips.hidden = false;
-    if(fabBackdrop) fabBackdrop.classList.add('show');
-  }
-  // Ensure collapsed on load
-function initFabCollapsed(){
-  if(presetFab){
-    presetFab.setAttribute('aria-expanded', 'false');
-  }
-  if(fabChips){ fabChips.hidden = true; }
-  if(fabBackdrop){ fabBackdrop.classList.remove('show'); }
-}
-
-function closeFab(){
-    presetFab.setAttribute('aria-expanded', 'false');
-    if(fabChips) fabChips.hidden = true;
-    if(fabBackdrop) fabBackdrop.classList.remove('show');
-  }
-
-  if(presetFab){
-    presetFab.addEventListener('click', (e)=>{
-      if(e.target.closest('.filter-chip') || e.target.id === 'fab-done') return;
-      const expanded = presetFab.getAttribute('aria-expanded') === 'true';
-      expanded ? closeFab() : openFab();
-    });
-    presetFab.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault();
-        const expanded = presetFab.getAttribute('aria-expanded') === 'true';
+      if(filtersEl){ filtersEl.hidden = true; }
+          const expanded = presetFab.getAttribute('aria-expanded') === 'true';
         expanded ? closeFab() : openFab();
       }
       if(e.key === 'Escape'){ closeFab(); }
     });
   }
-  if(fabDone) fabDone.addEventListener('click', closeFab);
-  if(fabBackdrop) fabBackdrop.addEventListener('click', closeFab);
-
+    
   // Hide pill on scroll down, show on scroll up
   renderFilters();
   renderCards();

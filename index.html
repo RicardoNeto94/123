@@ -4,23 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shang Shi Menu</title>
-  <meta name="theme-color" content="#0A0E14">
+  <meta name="theme-color" content="#0C2E1A">
+  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=1755735356">
 </head>
-<body class="dark">
-<header class="header" role="banner">
-  <img src="logo.png" alt="Shang Shi" class="header-logo">
-</header>
+<body>
+  <header class="header" role="banner">
+    <img src="logo.png" alt="Shang Shi" class="header-logo">
+    </header>
 
-<section class="preset-topbar" role="region" aria-label="Allergen presets">
-  <div id="filters" class="filters" role="listbox" aria-multiselectable="true"></div>
-</section>
+  <main class="container" role="main">
+    <section class="filters-wrap" role="region" aria-label="Allergen filters">
+      <div class="filters" id="filters" role="tablist" aria-multiselectable="true"></div>
+    </section>
 
-<main class="container" role="main">
-  <section id="grid" class="grid" aria-live="polite"></section>
-  <div id="empty" class="empty" hidden>No dishes match these filters. Try removing one.</div>
-</main>
+    <section id="grid" class="grid" aria-live="polite"></section>
 
+    <div id="empty" class="empty" hidden>
+      No dishes match these filters. Try removing one.
+    </div>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>

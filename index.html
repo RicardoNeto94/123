@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#F5F5F5">
+  <meta name="theme-color" content="#18392b">
   <title>Shang Shi — Intro</title>
   <style>
     :root{
@@ -27,16 +27,14 @@
 <body>
   <div class="wrap">
     <div class="center">
-      <img src="./logo.png" alt="Shang Shi logo" class="logo" id="enterLogo">
-      <button class="enter" id="enterBtn" aria-label="Enter menu">ENTER</button>
+      <img src="./logo.png" alt="Shang Shi logo" class="logo" id="enterLogo" style="box-shadow:0 0 12px rgba(212,175,55,0.5); border-radius:50%; cursor:pointer;">
     </div>
-    <footer class="foot">Shang Shi Allergen Selector 2025</footer>
+    <footer class="foot"><span style="color:#d4af37">Shang Shi Allergen Selector 2025</span></footer>
   </div>
   <script>
     const go = () => location.href = "./menu.html";
     document.getElementById('enterLogo').addEventListener('click', go, {passive:true});
-    document.getElementById('enterBtn').addEventListener('click', go, {passive:true});
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') go(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') go(); });
   </script>
 </body>
 </html>

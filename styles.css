@@ -291,21 +291,8 @@ body{
 }
 
 /* ===== Frosted blur backdrop for expanded selector ===== */
-.fab-backdrop{
-  position: fixed;
-  inset: 0;
-  z-index: 85;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(0,0,0,.35);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .25s ease;
-}
-.fab-backdrop.show{
-  opacity: 1;
-  pointer-events: auto;
-}
+.fab-backdrop{ position:fixed; inset:0; z-index:85; opacity:0; pointer-events:none; }
+.fab-backdrop.show{ opacity:0; pointer-events:none; }
 
 /* Ensure the expanding pill sits above the backdrop */
 .preset-fab{ z-index:  90; } /* keep earlier z-index high */
@@ -360,17 +347,19 @@ body{ margin:0; background: var(--bg); color: var(--text); font-family:'Inter', 
 .preset-fab.is-hidden{ opacity:0; transform: translateX(-50%) translateY(20px); pointer-events:none; }
 
 /* Expanded pill with blur backdrop */
-.fab-backdrop{ position:fixed; inset:0; z-index:85; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(0,0,0,.35); opacity:0; pointer-events:none; transition: opacity .25s ease; }
-.fab-backdrop.show{ opacity:1; pointer-events:auto; }
+.fab-backdrop{ position:fixed; inset:0; z-index:85; opacity:0; pointer-events:none; }
+.fab-backdrop.show{ opacity:0; pointer-events:none; }
 
 .preset-fab[aria-expanded="true"]{
   padding: 12px 14px !important;
   width: min(88vw, 520px) !important;
   border-radius: 24px !important;
-  background: var(--panel) !important; /* solid */
+  background-color: var(--panel) !important; /* SOLID */
+  background: var(--panel) !important;       /* ensure no gradient wins */
   border: 1px solid var(--gold) !important;
-  box-shadow: 0 16px 38px rgba(0,0,0,.55), 0 0 0 2px rgba(194,166,91,.12) inset, 0 0 24px rgba(194,166,91,.15) !important; /* soft gold glow */
+  box-shadow: 0 16px 38px rgba(0,0,0,.55), 0 0 0 2px rgba(194,166,91,.12) inset, 0 0 24px rgba(194,166,91,.15) !important;
 }
+
 
 .preset-fab[aria-expanded="true"] .caret{ transform: rotate(180deg); }
 
@@ -408,9 +397,11 @@ body{ margin:0; background: var(--bg); color: var(--text); font-family:'Inter', 
   padding: 12px 14px !important;
   width: min(88vw, 520px) !important;
   border-radius: 24px !important;
-  background: var(--panel) !important; /* solid */
+  background-color: var(--panel) !important; /* SOLID */
+  background: var(--panel) !important;       /* ensure no gradient wins */
   border: 1px solid var(--gold) !important;
-  box-shadow: 0 16px 38px rgba(0,0,0,.55), 0 0 0 2px rgba(194,166,91,.12) inset, 0 0 24px rgba(194,166,91,.15) !important; /* soft gold glow */
+  box-shadow: 0 16px 38px rgba(0,0,0,.55), 0 0 0 2px rgba(194,166,91,.12) inset, 0 0 24px rgba(194,166,91,.15) !important;
 }
+
 
 }

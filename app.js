@@ -26,6 +26,7 @@
         if(selected.has(code)){ selected.delete(code); btn.classList.remove('active'); }
         else { selected.add(code); btn.classList.add('active'); }
         renderCards();
+  initFabCollapsed();
       });
       fabChips.appendChild(btn);
     });
@@ -75,7 +76,16 @@
     if(fabChips) fabChips.hidden = false;
     if(fabBackdrop) fabBackdrop.classList.add('show');
   }
-  function closeFab(){
+  // Ensure collapsed on load
+function initFabCollapsed(){
+  if(presetFab){
+    presetFab.setAttribute('aria-expanded', 'false');
+  }
+  if(fabChips){ fabChips.hidden = true; }
+  if(fabBackdrop){ fabBackdrop.classList.remove('show'); }
+}
+
+function closeFab(){
     presetFab.setAttribute('aria-expanded', 'false');
     if(fabChips) fabChips.hidden = true;
     if(fabBackdrop) fabBackdrop.classList.remove('show');
@@ -102,4 +112,5 @@
   // Hide pill on scroll down, show on scroll up
   renderFilters();
   renderCards();
+  initFabCollapsed();
 })();

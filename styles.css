@@ -160,3 +160,62 @@ body{
 
 /* Align toggle to scheme */
 
+
+
+/* === Shang Shi Earthy Palette – override layer === */
+:root{
+  --rangoon:#2a2c25;  /* deep green-black */
+  --pine:#3c5259;     /* mountain pine */
+  --teal:#83a1a4;     /* cold waterlogged */
+  --gin:#ba8c5a;      /* brass/gold accent */
+  --west:#8d6042;     /* warm brown */
+  --antique:#57422f;  /* dark brown */
+  --text:#f5f6f5;
+  --muted:#d2d6d5;
+  --card:#f9faf9;     /* keep readable off-white surface */
+  --chip-bg:#2f3531;
+}
+
+html,body{
+  background: radial-gradient(1200px 800px at 50% -10%, rgba(186,140,90,0.08), transparent 60%) , 
+              linear-gradient(180deg, var(--rangoon) 0%, var(--pine) 100%);
+  color: var(--text);
+}
+
+.header-logo{
+  box-shadow:
+    0 0 0 2px var(--gin),
+    0 8px 20px rgba(0,0,0,.55),
+    0 0 40px rgba(186,140,90,.25);
+}
+
+.chips{ justify-content:center; }
+.chip{
+  background: var(--chip-bg);
+  border: 1px solid rgba(186,140,90,.55);
+  color: var(--text);
+}
+.chip.active{
+  background: var(--gin);
+  border-color: var(--gin);
+  color: #111;
+}
+
+.card{
+  background: var(--card);
+  color:#1b1d1b;
+  border: 1px solid rgba(0,0,0,.05);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+}
+.card h3{ color:#1b1d1b; }
+.badge{ background:#fff; color:#2e2f2d; border:1px solid rgba(0,0,0,.08); }
+.badge.safe{ background:#e7f3e8; border-color:#2c6e49; color:#1f5a38; }
+
+a, .active-filter{ color: var(--gin); }
+.header, .footer{ border-color: rgba(186,140,90,.35); }
+input[type=search], button.ghost{
+  border-color: rgba(186,140,90,.45);
+}
+
+hr, .divider{ border-color: rgba(186,140,90,.25); }
+.chips::-webkit-scrollbar{ display:none; }

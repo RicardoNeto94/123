@@ -4,24 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#F5F5F5">
-  <title>Shang Shi Menu</title>
-  <link rel="stylesheet" href="./styles.css?v=glass1">
+  <title>Shang Shi — Intro</title>
+  <style>
+    :root{
+      --bg:#F5F5F5;
+      --text:#1b1b1b;
+      --muted:#666;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+    .wrap{min-height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:24px}
+    .center{display:grid;place-items:center;gap:16px}
+    .logo{width:140px;height:auto;display:block;border:none;background:transparent}
+    .enter{border:1px solid rgba(0,0,0,.15);background:#fff;color:#1b1b1b;border-radius:999px;padding:12px 18px;font-size:14px;cursor:pointer}
+    .enter:active{transform:scale(0.99)}
+    .foot{color:var(--muted);font-size:12px;padding:16px 0;text-align:center;width:100%}
+    @media (max-width:480px){
+      .logo{width:128px}
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <img src="./logo.png" alt="Shang Shi logo" class="header-logo" />
-    <p class="subtitle">Select allergen(s) to show only <strong>SAFE</strong> dishes.</p>
-    <div id="chips" class="chips" role="group" aria-label="Allergen filters"></div>
-    <div class="meta-row"><span id="resultCount">0 dishes</span> <span id="activeFilter" class="active-filter">No filters active</span></div>
-  </header>
-
-  <main class="main">
-    <section id="grid" class="grid" aria-live="polite"></section>
-    <div id="empty" class="empty hidden">SAFE = dish does <strong>not</strong> contain selected allergen(s).</div>
-  </main>
-
-  <footer class="footer">SAFE = dish does <strong>not</strong> contain selected allergen(s).</footer>
-
-  <script src="./app.js?v=glass1" defer></script>
+  <div class="wrap">
+    <div class="center">
+      <img src="./logo.png" alt="Shang Shi logo" class="logo" id="enterLogo">
+      <button class="enter" id="enterBtn" aria-label="Enter menu">ENTER</button>
+    </div>
+    <footer class="foot">Shang Shi Allergen Selector 2025</footer>
+  </div>
+  <script>
+    const go = () => location.href = "./menu.html";
+    document.getElementById('enterLogo').addEventListener('click', go, {passive:true});
+    document.getElementById('enterBtn').addEventListener('click', go, {passive:true});
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') go(); });
+  </script>
 </body>
 </html>

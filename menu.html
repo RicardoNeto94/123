@@ -15,13 +15,19 @@
     
   </header>
 
-<section class="presets">
+<div class="filter-fab">
+  <button class="filter-btn" id="filterToggle" aria-expanded="false" aria-controls="filterPanel">
+    <span class="dot"></span>
+    Filters
+  </button>
+</div>
+<div class="filter-panel" id="filterPanel">
   <div id="chips" class="chips" role="group" aria-label="Allergen filters"></div>
-  <div class="meta-row"><span id="resultCount">0 dishes</span> <span id="activeFilter" class="active-filter">No filters active</span></div>
-</section>
+</div>
+<div class="meta-row"><span id="resultCount">0 dishes</span> <span id="activeFilter" class="active-filter">No filters active</span></div>
 
 
-  <main class="main">
+<main class="main">
     <section id="grid" class="grid" aria-live="polite"></section>
     <div id="empty" class="empty hidden">SAFE = dish does <strong>not</strong> contain selected allergen(s).</div>
   </main>

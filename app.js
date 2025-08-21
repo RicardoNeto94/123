@@ -55,3 +55,20 @@ function updateMeta(n,sel){
   buildChips(chips,rerender);
   renderGrid(grid,dishes,[]);updateMeta(dishes.length,[]);empty.classList.add('hidden');
 })();
+
+
+function toggleFilterPanel(open){
+  const panel = document.getElementById('filterPanel');
+  const btn = document.getElementById('filterToggle');
+  if(!panel || !btn) return;
+  const willOpen = (open !== undefined) ? open : !panel.classList.contains('open');
+  panel.classList.toggle('open', willOpen);
+  btn.setAttribute('aria-expanded', String(willOpen));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('filterToggle');
+  if(btn){
+    btn.addEventListener('click', () => toggleFilterPanel());
+  }
+});

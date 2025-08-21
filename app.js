@@ -1,3 +1,4 @@
+
 // Allergen legend
 const LEGEND = {
   "CE":"Celery","GL":"Cereals (Gluten)","CR":"Crustaceans","EG":"Eggs","FI":"Fish",
@@ -6,9 +7,49 @@ const LEGEND = {
 };
 const codeToLabel = c => LEGEND[c] || c;
 
+// Try to load menu.json with cache busting. If it fails, return [] and show diagnostic.
 async function loadMenu(){
-  try{ const r = await fetch('./menu.json',{cache:'no-store'}); if(!r.ok) return []; return await r.json(); }
-  catch(e){ return []; }
+  const url = './menu.json?v=' + Date.now();
+  try{
+    const r = await fetch(url, {cache:'no-store'});
+    if(!r.ok){
+      console.warn('menu.json fetch failed:', r.status, r.statusText);
+      window.__menu_error__ = `Fetch failed: ${r.status} ${r.statusText}`;
+      return [];
+    }
+    const data = await r.json();
+    return normalizeMenu(data);
+  }catch(e){
+    console.error('menu.json load error:', e);
+    window.__menu_error__ = e.message || String(e);
+    return [];
+  }
+}
+
+// Normalize schema: ensure array of { name, description?, allergens: string[] }
+function normalizeMenu(data){
+  if(!Array.isArray(data)){
+    // Try to detect nested structure like {items:[...]}
+    if(data && Array.isArray(data.items)) data = data.items;
+    else return [];
+  }
+  return data.map(item => {
+    const out = { ...item };
+    // name fallback
+    if(!out.name && out.title) out.name = out.title;
+    // description fallback
+    if(!out.description && out.desc) out.description = out.desc;
+    // allergens normalize
+    let a = out.allergens;
+    if(typeof a === 'string'){
+      a = a.split(/[;,]/).map(s => s.trim()).filter(Boolean);
+    }
+    if(!Array.isArray(a)) a = [];
+    // Uppercase codes
+    a = a.map(s => String(s).trim()).map(s => (/^[a-z]+$/.test(s)? s.toUpperCase(): s));
+    out.allergens = a;
+    return out;
+  });
 }
 
 function buildChips(container, onChange){
@@ -59,7 +100,7 @@ function renderGrid(el, list, sel){
     });
     card.appendChild(badges);
 
-    // Add safe check INSIDE the card if it passes active filters
+    // Safe check inside card if passes active filters
     if(haveFilters){
       const pass = sel.every(c => !(item.allergens||[]).includes(c));
       if(pass){
@@ -104,17 +145,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const empty = document.getElementById('empty');
 
   const dishes = await loadMenu();
-
   const rerender = ()=>{
     const sel = getActiveFilters();
     const data = filterDishes(dishes, sel);
     renderGrid(grid, data, sel);
     updateMeta(data.length, sel);
-    if(empty) empty.classList.toggle('hidden', data.length !== 0);
+    if(empty){
+      if(data.length === 0){
+        empty.classList.remove('hidden');
+        if(window.__menu_error__){
+          empty.innerHTML = 'Could not load <code>menu.json</code>: ' + window.__menu_error__ + '<br><br>Make sure the file exists, is valid JSON (an array), and is in the same folder as <code>menu.html</code>.';
+        } else {
+          empty.innerHTML = 'No dishes matched.<br>Try clearing filters or check your <code>menu.json</code> data.';
+        }
+      } else {
+        empty.classList.add('hidden');
+      }
+    }
   };
 
-  buildChips(chips, rerender);
+  if(chips) buildChips(chips, rerender);
   renderGrid(grid, dishes, []);
   updateMeta(dishes.length, []);
-  if(empty) empty.classList.add('hidden');
+  if(empty) empty.classList.toggle('hidden', dishes.length !== 0);
 })();

@@ -100,23 +100,6 @@
   if(fabBackdrop) fabBackdrop.addEventListener('click', closeFab);
 
   // Hide pill on scroll down, show on scroll up
-  (function(){
-    const bar = presetFab;
-    if(!bar) return;
-    let lastY = window.pageYOffset || 0;
-    let ticking = false;
-    function onScroll(){
-      const y = window.pageYOffset || 0;
-      if(y > lastY + 4){ bar.classList.add('is-hidden'); }
-      else if(y < lastY - 4){ bar.classList.remove('is-hidden'); }
-      lastY = y;
-      ticking = false;
-    }
-    window.addEventListener('scroll', ()=>{
-      if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
-    }, { passive: true });
-  })();
-
   renderFilters();
   renderCards();
 })();

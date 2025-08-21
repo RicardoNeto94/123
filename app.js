@@ -1,32 +1,33 @@
+
 (async function(){
   const grid = document.getElementById('grid');
-  const filtersEl = document.getElementById('filters');
   const empty = document.getElementById('empty');
+  const presetFab = document.getElementById('preset-fab');
+  const fabChips = document.getElementById('fab-chips');
+  const fabDone = document.getElementById('fab-done');
+  const fabBackdrop = document.getElementById('fab-backdrop');
+
   const res = await fetch('menu.json');
   const data = await res.json();
 
-  // Collect unique allergens from dataset
   const allAllergens = Array.from(new Set(data.flatMap(d => d.allergens || []))).sort();
-
-  // Selected allergen codes (multi-select). Show dishes SAFE from these.
   const selected = new Set();
 
   function renderFilters(){
-    filtersEl.innerHTML = '';
+    if(!fabChips) return;
+    fabChips.innerHTML = '';
     allAllergens.forEach(code => {
       const btn = document.createElement('button');
       btn.className = 'filter-chip';
       btn.type = 'button';
       btn.textContent = code;
-      btn.setAttribute('aria-pressed', selected.has(code) ? 'true' : 'false');
       if(selected.has(code)) btn.classList.add('active');
       btn.addEventListener('click', () => {
-        if(selected.has(code)) { selected.delete(code); }
-        else { selected.add(code); }
-        renderFilters();
+        if(selected.has(code)){ selected.delete(code); btn.classList.remove('active'); }
+        else { selected.add(code); btn.classList.add('active'); }
         renderCards();
       });
-      filtersEl.appendChild(btn);
+      fabChips.appendChild(btn);
     });
   }
 
@@ -34,7 +35,7 @@
     if(selected.size === 0) return true;
     const itemAllergens = new Set(item.allergens || []);
     for(const code of selected){
-      if(itemAllergens.has(code)) return false; // contains one of the selected allergens -> not safe
+      if(itemAllergens.has(code)) return false;
     }
     return true;
   }
@@ -43,26 +44,20 @@
     grid.innerHTML = '';
     const items = data.filter(isSafe);
     empty.hidden = items.length !== 0;
-
     items.forEach(item => {
       const el = document.createElement('article');
       el.className = 'card';
-      const header = document.createElement('h3');
-      header.textContent = item.name;
-      el.appendChild(header);
+      el.innerHTML = `<h3>${item.name}</h3>`;
 
       const meta = document.createElement('div');
       meta.className = 'meta';
 
-      // Safe badge if at least one filter is active and item is safe
       if(selected.size > 0){
         const safe = document.createElement('span');
         safe.className = 'badge safe';
         safe.textContent = 'SAFE';
         meta.appendChild(safe);
       }
-
-      // Allergen code badges
       (item.allergens || []).forEach(code => {
         const b = document.createElement('span');
         b.className = 'badge';
@@ -75,77 +70,53 @@
     });
   }
 
+  function openFab(){
+    presetFab.setAttribute('aria-expanded', 'true');
+    if(fabChips) fabChips.hidden = false;
+    if(fabBackdrop) fabBackdrop.classList.add('show');
+  }
+  function closeFab(){
+    presetFab.setAttribute('aria-expanded', 'false');
+    if(fabChips) fabChips.hidden = true;
+    if(fabBackdrop) fabBackdrop.classList.remove('show');
+  }
+
+  if(presetFab){
+    presetFab.addEventListener('click', (e)=>{
+      if(e.target.closest('.filter-chip') || e.target.id === 'fab-done') return;
+      const expanded = presetFab.getAttribute('aria-expanded') === 'true';
+      expanded ? closeFab() : openFab();
+    });
+    presetFab.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        const expanded = presetFab.getAttribute('aria-expanded') === 'true';
+        expanded ? closeFab() : openFab();
+      }
+      if(e.key === 'Escape'){ closeFab(); }
+    });
+  }
+  if(fabDone) fabDone.addEventListener('click', closeFab);
+  if(fabBackdrop) fabBackdrop.addEventListener('click', closeFab);
+
+  // Hide pill on scroll down, show on scroll up
+  (function(){
+    const bar = presetFab;
+    if(!bar) return;
+    let lastY = window.pageYOffset || 0;
+    let ticking = false;
+    function onScroll(){
+      const y = window.pageYOffset || 0;
+      if(y > lastY + 4){ bar.classList.add('is-hidden'); }
+      else if(y < lastY - 4){ bar.classList.remove('is-hidden'); }
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', ()=>{
+      if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+  })();
+
   renderFilters();
   renderCards();
 })();
-
-
-// Floating preset panel logic
-const presetToggle = document.getElementById('preset-toggle');
-const panel = document.getElementById('filters-panel');
-const panelClose = document.getElementById('filters-close');
-const backdrop = panel ? panel.querySelector('.filters-backdrop') : null;
-
-function openPanel(){
-  panel.hidden = false;
-  presetToggle.setAttribute('aria-expanded', 'true');
-  // focus first chip if exists
-  const firstChip = document.querySelector('.filter-chip');
-  if(firstChip) firstChip.focus();
-}
-function closePanel(){
-  panel.hidden = true;
-  presetToggle.setAttribute('aria-expanded', 'false');
-  presetToggle.focus();
-}
-if(presetToggle && panel){
-  presetToggle.addEventListener('click', () => {
-    if(panel.hidden) openPanel(); else closePanel();
-  });
-}
-if(panelClose) panelClose.addEventListener('click', closePanel);
-if(backdrop) backdrop.addEventListener('click', closePanel);
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape' && !panel.hidden) closePanel();
-});
-
-// Hide/show preset toggle on scroll direction
-let lastScrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-  const toggle = document.getElementById('preset-toggle');
-  if(!toggle) return;
-  if(window.scrollY > lastScrollY + 10){ // scrolling down
-    toggle.classList.add('hide');
-  } else if(window.scrollY < lastScrollY - 10){ // scrolling up
-    toggle.classList.remove('hide');
-  }
-  lastScrollY = window.scrollY;
-});
-
-// Hide floating preset toggle on scroll down, show on scroll up
-(function(){
-  const bar = document.getElementById('preset-toggle');
-  if(!bar) return;
-  let lastY = window.pageYOffset || 0;
-  let ticking = false;
-  function onScroll(){
-    const y = window.pageYOffset || 0;
-    const goingDown = y > lastY + 4;   // small threshold to avoid jitter
-    const goingUp = y < lastY - 4;
-    if(goingDown){
-      bar.classList.add('is-hidden');
-    } else if(goingUp){
-      bar.classList.remove('is-hidden');
-    }
-    lastY = y;
-    ticking = false;
-  }
-  window.addEventListener('scroll', ()=>{
-    if(!ticking){
-      window.requestAnimationFrame(onScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-})(); 
-
-if(fabBackdrop){ fabBackdrop.addEventListener('click', closeFab); }

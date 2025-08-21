@@ -4,40 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shang Shi Menu</title>
-  <meta name="theme-color" content="#0C2E1A">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#0A0E14">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=1755735356">
 </head>
-<body>
+<body class="dark">
   <header class="header" role="banner">
     <img src="logo.png" alt="Shang Shi" class="header-logo">
-    </header>
+  </header>
 
   <main class="container" role="main">
-    <!-- Floating Preset Toggle -->
-<button id="preset-toggle" class="preset-toggle" aria-expanded="false" aria-controls="filters-panel">
-  Select allergens
-  <span class="caret">▼</span>
-</button>
-
-<!-- Slide-up Filters Panel -->
-<div id="filters-panel" class="filters-panel" role="dialog" aria-modal="true" aria-label="Allergen presets" hidden>
-  <div class="filters-sheet">
-    <div class="filters" id="filters" role="listbox" aria-multiselectable="true"></div>
-    <button id="filters-close" class="filters-close" aria-label="Close">Done</button>
-  </div>
-  <div class="filters-backdrop"></div>
-</div>
-
-
     <section id="grid" class="grid" aria-live="polite"></section>
-
-    <div id="empty" class="empty" hidden>
-      No dishes match these filters. Try removing one.
-    </div>
+    <div id="empty" class="empty" hidden>No dishes match these filters. Try removing one.</div>
   </main>
 
-  <script src="app.js"></script>
+  <!-- Floating pill selector -->
+  <div id="preset-fab" class="preset-fab" role="button" tabindex="0" aria-expanded="false" aria-controls="fab-chips">
+    <span class="label">Select allergens <span class="caret" aria-hidden="true">▾</span></span>
+    <div id="fab-chips" class="fab-chips" hidden></div>
+    <button id="fab-done" class="fab-done" aria-label="Apply">Done</button>
+  </div>
+  <!-- Blur backdrop -->
   <div id="fab-backdrop" class="fab-backdrop" aria-hidden="true"></div>
+
+  <script src="app.js?v=1755735356"></script>
 </body>
 </html>

@@ -147,3 +147,5 @@ window.addEventListener('scroll', () => {
     }
   }, { passive: true });
 })(); 
+
+if(fabBackdrop){ fabBackdrop.addEventListener('click', closeFab); }

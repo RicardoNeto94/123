@@ -1,6 +1,7 @@
 
 (async function(){
   const grid = document.getElementById('grid');
+  const filtersEl = document.getElementById('filters');
   const empty = document.getElementById('empty');
         
   const res = await fetch('menu.json');
@@ -68,7 +69,6 @@
   }
 
       if(filtersEl){ filtersEl.hidden = true; }
-          const expanded = presetFab.getAttribute('aria-expanded') === 'true';
         expanded ? closeFab() : openFab();
       }
       if(e.key === 'Escape'){ closeFab(); }

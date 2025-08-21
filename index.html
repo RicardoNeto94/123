@@ -9,23 +9,18 @@
   <link rel="stylesheet" href="styles.css?v=1755735356">
 </head>
 <body class="dark">
-  <header class="header" role="banner">
-    <img src="logo.png" alt="Shang Shi" class="header-logo">
-  \1
+<header class="header" role="banner">
+  <img src="logo.png" alt="Shang Shi" class="header-logo">
+</header>
+
 <section class="preset-topbar" role="region" aria-label="Allergen presets">
   <div id="filters" class="filters" role="listbox" aria-multiselectable="true"></div>
 </section>
 
+<main class="container" role="main">
+  <section id="grid" class="grid" aria-live="polite"></section>
+  <div id="empty" class="empty" hidden>No dishes match these filters. Try removing one.</div>
+</main>
 
-  <main class="container" role="main">
-    <section id="grid" class="grid" aria-live="polite"></section>
-    <div id="empty" class="empty" hidden>No dishes match these filters. Try removing one.</div>
-  </main>
-
-  <!-- Floating pill selector -->
-  <button id="fab-done" class="fab-done" aria-label="Apply">Done</button>
-  </div>
-  <!-- Blur backdrop -->
-  <script src="app.js?v=1755735356"></script>
 </body>
 </html>
